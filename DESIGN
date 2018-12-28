@@ -1,0 +1,86 @@
+﻿Crystal Wang, Robin Han, Steven Liu
+Systems Final Project
+
+
+Idea
+We want to recreate the board game Scrabble so that it can be played between two to four computers in a bash shell. We plan on using several files, different data structures stored in shared memory with semaphores, networking, signal-handling, etc.
+
+
+User Interface
+Each player would be able to see the current board, which would have special tiles labelled (with a key on the side), and their own tiles. The board would also have numbers on the left and bottom, like a chessboard, so that the player will know the index of where to start placing the tiles. They can then input which the tiles to add in the correct order. If the input is valid (i.e., is a valid word and does not exceed the limits of the board), the tiles will be added, the board will be updated on both screens, and the score will be updated. At any time, the user also has the option of exiting the game or pausing the game using signals, and the option to see the high score board. 
+
+
+Implementation
+Front-end: uses the terminal (Crystal)
+* Board, tiles, etc. are displayed on the terminal by printing to stdout
+* User input is taken from stdin
+* Color-coded
+
+
+Scrabble board: 2-D 15 x 15 linked list of char values (Crystal)
+* stored as shared memory
+* has a semaphore with max value 1
+* all the values set to ‘\0’ initially
+* each node has an up, down, left and right node as well as an int value that is:
+   * 0 if the node is not a special tile
+   * 1 if the node is double letter
+   * 2 if the node is triple letter
+   * 3 if the node is double word
+   * and so on… 
+
+
+Player tiles: char array of size 7 bytes for each player (Robin)
+* generated semi-randomly using /dev/random
+   * preference given to more common letters
+
+
+Letter point scores: int array of size 27 bytes (Robin)
+* stores the point value of each letter and a blank tile
+
+
+Player scores: int array of size 8 bytes (Steven)
+* stored as shared memory
+* no semaphore, because players will only modify their own score
+
+
+High Score Board: comma-separated values file keeps track of the scores (Steven)
+* accessed and displayed on demand
+
+
+Dictionary: C file with every possible word stored inside to verify words added are correct (Robin)
+* read and write permissions are disabled for all users (so that players can’t open the file to cheat)
+* processes can only execute the file through an unnamed pipe
+* file reads a word from stdin (i.e. from another file after the pipe is created), checks if it is a word, then returns the answer
+
+
+Signal handling: certain signals have a specific meaning (Steven)
+* SIGINT is an automatic win for the other player (opponent has exited the game)
+* SIGSTOP pauses the game
+
+
+Timeline
+December 31st, 2018
+* Linked list struct created and completed
+* Function to create and randomize the tiles written
+* Letter point scores added
+
+
+January 3rd, 2019:
+* Special tiles on the board added
+* Semaphores added
+
+
+January 7th, 2018:
+* Dictionary file added
+* Piping into dictionary file completed
+
+
+January 11th, 2018:
+* Networking incorporated
+* Signal handling done
+* Additional features
+
+
+January 14th, 2018:
+* Front-end development
+* “How To Play” option added
