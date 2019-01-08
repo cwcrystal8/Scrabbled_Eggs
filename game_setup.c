@@ -21,14 +21,30 @@ struct node* create_board(){
 struct node* set_special_squares(struct node *start){
   //double letter
   int double_letter_x[4] = {7,1,4,5}, double_letter_y[4] = {4,1,0,1};
-  set_special_squares_specific(start, double_letter_x, double_letter_y, 1);
+  set_special_squares_specific(start, double_letter_x, double_letter_y, 1, 4);
+
+  //triple letter
+  int triple_letter_x[2] = {2,2}, triple_letter_y[2] = {2,6};
+  set_special_squares_specific(start, triple_letter_x, triple_letter_y, 2, 2);
+
+  //double word
+  int double_word[4] = {3,4,5,6};
+  set_special_squares_specific(start, double_word, double_word, 3, 4);
+
+  //triple word
+  int triple_word_x[2] = {7,7}, triple_word_y[2] = {7,0};
+  set_special_squares_specific(start, triple_word_x, triple_word_y, 4, 2);
+
+  //middle starting
+  int x[1] = {0}, y[1] = {0};
+  set_special_squares_specific(start, x, y, 5, 1);
 
   return start;
 }
 
-void set_special_squares_specific(struct node *start, int *x, int *y, int special_value){
+void set_special_squares_specific(struct node *start, int *x, int *y, int special_value, int len){
   int i;
-  for(i = 0; i < 4; i++){
+  for(i = 0; i < len; i++){
     int first = x[i], second = y[i];
     struct node* center = get_node(start, 7, 7);
     change_special_value(center, first, second, special_value);

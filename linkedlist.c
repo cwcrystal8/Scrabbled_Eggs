@@ -40,6 +40,22 @@ void change_special_value(struct node *start, int i, int j, char new_value){
 }
 
 void print_list(struct node *current){
+  char *colors[6];
+  colors[0] = "\x1b[107m";
+  colors[1] = "\x1b[104m";
+  colors[2] = "\x1b[44m";
+  colors[3] = "\x1b[45m";
+  colors[4] = "\x1b[41m";
+  colors[5] = "\x1b[102m";
+  printf("[");
+  while((current -> right) != NULL){
+    printf("\x1b[30m%s%c\x1b[0m ", colors[current->special], current -> c);
+    current = current -> right;
+  }
+  printf("\x1b[30m%s%c\x1b[0m]", colors[current->special], current -> c);
+
+  printf("\n");
+  /*
   printf("[");
   while((current -> right) != NULL){
     if(current->special) printf("\x1b[32m\x1b[31m%c\x1b[0m, ", current -> c);
@@ -48,7 +64,7 @@ void print_list(struct node *current){
   }
   if(current->special) printf("\x1b[32m\x1b[31m%c\x1b[0m]", current -> c);
   else printf("%c]", current -> c);
-  printf("\n");
+  printf("\n");*/
 }
 
 void print_board(struct node *current){
