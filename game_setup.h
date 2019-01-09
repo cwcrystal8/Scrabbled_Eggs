@@ -1,4 +1,4 @@
-struct node* setup();
+struct Player** setup(struct node** start, int num_players);
 
 void print_info();
 

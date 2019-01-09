@@ -14,7 +14,6 @@ struct Player* create_player(struct node** letter_list){
   struct Player* new_player = calloc(1, sizeof(int) + sizeof(struct node *));
   new_player->score = 0;
   new_player->tiles = generate_initial_player_tiles(letter_list);
-  //print_list(new_player->tiles);
   return new_player;
 }
 

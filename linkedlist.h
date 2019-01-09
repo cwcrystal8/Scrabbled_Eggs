@@ -21,3 +21,5 @@ char get_char_value(struct node *start, int index);
 int get_length(struct node* start);
 
 void print_board_list(struct node* current, int place);
+
+int search_word(struct node* start, char* letters);

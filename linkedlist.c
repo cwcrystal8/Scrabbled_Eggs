@@ -167,13 +167,17 @@ struct node * remove_node(struct node *start, int index){ //for tiles only
   return start;
 }
 
-/*
-int search(struct node* start, char* letters){
-  int i, j, is_used[7] = {0,0,0,0,0,0,0};
+int search_word(struct node* start, char* letters){
+  int i, j, is_used[7] = {0,0,0,0,0,0,0}, is_here = 0;
   for(i = 0; i < sizeof(letters)/sizeof(char); i++){
+    is_here = 0;
     for(j = 0; j < 7; j++){
-      if(letters[i] == get_char_value(start, j))
+      if(letters[i] == get_char_value(start, j) && !is_used[j]) {
+        is_used[j] = 1;
+        is_here = 1;
+      }
     }
+    if(!is_here) return 0;
   }
+  return 1;
 }
-*/

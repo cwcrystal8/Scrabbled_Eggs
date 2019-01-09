@@ -9,7 +9,8 @@
 #include "player.h"
 
 int main(){
-  struct node *start = setup();
+  struct node *start;
+  struct Player** all_players = setup(&start, 4);
 
   free_list(start);
   return 0;
