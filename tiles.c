@@ -8,6 +8,7 @@
 struct node* tiles_setup(){
   struct node* letter_list = generate_all_tiles();
   struct node* player_tiles = generate_initial_player_tiles(letter_list);
+  print_list(player_tiles);
   return player_tiles;
 }
 
@@ -22,15 +23,20 @@ struct node* generate_all_tiles(){
   return letter_list;
 }
 
-struct node* generate_initial_player_tiles(struct node* letter_list){
+char get_random_tile(struct node** letter_list){
   srand(time(NULL));
+  int index = rand() % (get_length(*letter_list));
+  char new_c = get_char_value(*letter_list, index);
+  *letter_list = remove_node(*letter_list, index);
+  return new_c;
+}
+
+struct node* generate_initial_player_tiles(struct node* letter_list){
   int i;
   struct node* player_tiles = NULL;
   for(i = 0; i < 7; i++){
-    int index = rand() % (get_length(letter_list));
-    char new_c = get_char_value(letter_list, index);
+    char new_c = get_random_tile(&letter_list);
     player_tiles = insert(player_tiles, new_c, 0, 0);
-    letter_list = remove_node(letter_list, index);
   }
   return get_node(player_tiles, -6, 0);
 }

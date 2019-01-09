@@ -8,6 +8,9 @@
 #include "board.h"
 
 int main(){
+  while(1){
+    setup();
+  }
   struct node *start = setup();
   int i, j;
   for(i = 0; i < 15; i++){

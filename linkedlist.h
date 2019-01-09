@@ -20,4 +20,4 @@ char get_char_value(struct node *start, int index);
 
 int get_length(struct node* start);
 
-void print_board_list(struct node* current);
+void print_board_list(struct node* current, int place);

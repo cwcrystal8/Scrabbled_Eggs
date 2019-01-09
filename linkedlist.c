@@ -64,7 +64,7 @@ void print_list(struct node *current){
   printf("\n");
 }
 
-void print_board_list(struct node* current){
+void print_board_list(struct node* current, int place){
   char *colors[6];
   colors[0] = "\x1b[107m";
   colors[1] = "\x1b[104m";
@@ -76,7 +76,9 @@ void print_board_list(struct node* current){
   for(i = 0; i < 3; i++){
     struct node* temp = current;
     char filler = ' ';
-    printf("       ");
+    if(i == 1 && place < 10) printf("   %d   ", place);
+    else if(i == 1) printf("  %d   ", place);
+    else printf("       ");
     while((temp -> right) != NULL){
       if(i == 1) filler = temp -> c;
       else filler = ' ';
@@ -89,11 +91,12 @@ void print_board_list(struct node* current){
 }
 
 void print_board(struct node *current){
-  while((current -> down) != NULL){
-    print_board_list(current);
+  int i;
+  printf("          A        B        C        D        E        F        G        H        I        J        K        L        M        N        O   \n\n");
+  for(i = 0; i < 15; i++){
+    print_board_list(current, i);
     current = current -> down;
   }
-  print_board_list(current);
 }
 
 struct node * insert(struct node * start, char new_value, int position, int special_value){
@@ -138,7 +141,7 @@ struct node * free_list(struct node *current){
 
 struct node * remove_node(struct node *start, int index){ //for tiles only
   struct node* target = get_node(start, index, 0);
-  if(start == target){ //if it is the beginning
+  if(index == 0){ //if it is the beginning
     struct node* temp = target->right;
     temp->left = NULL;
     free(target);
