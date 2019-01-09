@@ -16,4 +16,50 @@ pd 4
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
+1/9/19 (NAME)
+Finished:
+- 
 
+---------
+
+
+1/8/19 (Crystal)
+Finished:
+- Player tile generation
+  - Random tiles are generated and then removed from the total tile pile
+  - Tile distribution is true to the actual game
+- Score points for each letter added
+
+Notes: I finished board setup, and tile set up (but only compatible for one player so far)
+
+
+---------
+
+
+1/7/19 (Crystal)
+Finished:
+- 2D Linkedlist functions:
+  - insert
+  - print (with color-coding for the special squares)
+  - change/set values
+  - etc.
+- Board setup with special squares set
+
+
+Notes: I tested basic 2D Linkedlist functions and was able to use the Linkedlist struct to create the Scrabble board
+
+
+---------
+
+
+1/2/19 (Robin)
+Finished:
+- Added DEVLOG template
+
+
+---------
+
+
+12/28/18 (Crystal)
+Finished:
+- Wrote and added DESIGN doc
