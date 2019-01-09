@@ -13,3 +13,11 @@ void change_char_value(struct node *start, int i, int j, char new_value);
 void change_special_value(struct node *start, int i, int j, char new_value);
 
 struct node* get_node(struct node *start, int i, int j);
+
+struct node * remove_node(struct node *start, int index);
+
+char get_char_value(struct node *start, int index);
+
+int get_length(struct node* start);
+
+void print_board_list(struct node* current);

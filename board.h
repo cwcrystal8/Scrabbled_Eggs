@@ -1,4 +1,4 @@
-struct node* setup();
+struct node* board_setup();
 
 struct node* create_board();
 

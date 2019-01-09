@@ -7,7 +7,7 @@ We want to recreate the board game Scrabble so that it can be played between two
 
 
 User Interface
-Each player would be able to see the current board, which would have special tiles labelled (with a key on the side), and their own tiles. The board would also have numbers on the left and bottom, like a chessboard, so that the player will know the index of where to start placing the tiles. They can then input which the tiles to add in the correct order. If the input is valid (i.e., is a valid word and does not exceed the limits of the board), the tiles will be added, the board will be updated on both screens, and the score will be updated. At any time, the user also has the option of exiting the game or pausing the game using signals, and the option to see the high score board. 
+Each player would be able to see the current board, which would have special tiles labelled (with a key on the side), and their own tiles. The board would also have numbers on the left and bottom, like a chessboard, so that the player will know the index of where to start placing the tiles. They can then input which the tiles to add in the correct order. If the input is valid (i.e., is a valid word and does not exceed the limits of the board), the tiles will be added, the board will be updated on both screens, and the score will be updated. At any time, the user also has the option of exiting the game or pausing the game using signals, and the option to see the high score board.
 
 
 Implementation
@@ -26,15 +26,15 @@ Scrabble board: 2-D 15 x 15 linked list of char values (Crystal)
    * 1 if the node is double letter
    * 2 if the node is triple letter
    * 3 if the node is double word
-   * and so on… 
+   * and so on…
 
 
-Player tiles: char array of size 7 bytes for each player (Robin)
+Player tiles: char array of size 7 bytes for each player (Crystal)
 * generated semi-randomly using /dev/random
    * preference given to more common letters
 
 
-Letter point scores: int array of size 27 bytes (Robin)
+Letter point scores: int array of size 27 bytes (Crystal)
 * stores the point value of each letter and a blank tile
 
 

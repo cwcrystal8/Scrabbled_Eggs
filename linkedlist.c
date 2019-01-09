@@ -21,6 +21,21 @@ struct node* get_node(struct node *start, int i, int j){
   return temp;
 }
 
+char get_char_value(struct node *start, int index){//for tiles only
+  struct node* temp = get_node(start, index, 0);
+  return temp->c;
+}
+
+int get_length(struct node* start){//for tiles only
+  int ans = 0;
+  struct node* temp = start;
+  while(temp){
+    ans++;
+    temp = temp->right;
+  }
+  return ans;
+}
+
 void change_char_value(struct node *start, int i, int j, char new_value){
   struct node *temp = start;
   for(i; i > 0; i--) temp = temp -> right;
@@ -40,6 +55,16 @@ void change_special_value(struct node *start, int i, int j, char new_value){
 }
 
 void print_list(struct node *current){
+  printf("[");
+  while((current -> right) != NULL){
+    printf("%c ", current -> c);
+    current = current -> right;
+  }
+  printf("%c]", current -> c);
+  printf("\n");
+}
+
+void print_board_list(struct node* current){
   char *colors[6];
   colors[0] = "\x1b[107m";
   colors[1] = "\x1b[104m";
@@ -47,32 +72,28 @@ void print_list(struct node *current){
   colors[3] = "\x1b[45m";
   colors[4] = "\x1b[41m";
   colors[5] = "\x1b[102m";
-  printf("[");
-  while((current -> right) != NULL){
-    printf("\x1b[30m%s%c\x1b[0m ", colors[current->special], current -> c);
-    current = current -> right;
+  int i;
+  for(i = 0; i < 3; i++){
+    struct node* temp = current;
+    char filler = ' ';
+    printf("       ");
+    while((temp -> right) != NULL){
+      if(i == 1) filler = temp -> c;
+      else filler = ' ';
+      printf("\x1b[30m%s   %c   \x1b[0m  ", colors[temp->special], filler);
+      temp = temp -> right;
+    }
+    printf("\x1b[30m%s   %c   \x1b[0m\n", colors[temp->special], filler);
   }
-  printf("\x1b[30m%s%c\x1b[0m]", colors[current->special], current -> c);
-
   printf("\n");
-  /*
-  printf("[");
-  while((current -> right) != NULL){
-    if(current->special) printf("\x1b[32m\x1b[31m%c\x1b[0m, ", current -> c);
-    else printf("%c, ", current -> c);
-    current = current -> right;
-  }
-  if(current->special) printf("\x1b[32m\x1b[31m%c\x1b[0m]", current -> c);
-  else printf("%c]", current -> c);
-  printf("\n");*/
 }
 
 void print_board(struct node *current){
   while((current -> down) != NULL){
-    print_list(current);
+    print_board_list(current);
     current = current -> down;
   }
-  print_list(current);
+  print_board_list(current);
 }
 
 struct node * insert(struct node * start, char new_value, int position, int special_value){
@@ -113,4 +134,23 @@ struct node * free_list(struct node *current){
     current = current -> down;
   }
   return current;
+}
+
+struct node * remove_node(struct node *start, int index){ //for tiles only
+  struct node* target = get_node(start, index, 0);
+  if(start == target){ //if it is the beginning
+    struct node* temp = target->right;
+    temp->left = NULL;
+    free(target);
+    return temp;
+  }
+  if(!target->right){//if it is the end
+    (target->left)->right = NULL;
+    free(target);
+    return start;
+  }
+  (target->left)->right = target->right;
+  (target->right)->left = target->left;
+  free(target);
+  return start;
 }
