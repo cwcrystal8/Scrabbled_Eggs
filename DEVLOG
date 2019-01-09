@@ -16,9 +16,12 @@ pd 4
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
-1/9/19 (NAME)
+1/9/19 (Crystal)
 Finished:
-- 
+- Player tile generation supports multiple players
+- Print_info available for player
+- Added letter values on each tile
+- Scrabble board can now be empty
 
 ---------
 

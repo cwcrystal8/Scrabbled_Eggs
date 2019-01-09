@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "linkedlist.h"
+#include "tiles.h"
 
 struct node {
   char c;
@@ -79,13 +80,21 @@ void print_board_list(struct node* current, int place){
     if(i == 1 && place < 10) printf("   %d   ", place);
     else if(i == 1) printf("  %d   ", place);
     else printf("       ");
+    int value = get_letter_value(temp->c);
     while((temp -> right) != NULL){
-      if(i == 1) filler = temp -> c;
+      value = get_letter_value(temp->c);
+      if(i == 1 && temp->c != '\0') filler = temp -> c;
       else filler = ' ';
-      printf("\x1b[30m%s   %c   \x1b[0m  ", colors[temp->special], filler);
+      if(i != 2) printf("\x1b[30m%s   %c   \x1b[0m  ", colors[temp->special], filler);
+      else if(value < 10) printf("\x1b[30m%s%d  %c   \x1b[0m  ", colors[temp->special], value, filler);
+      else if(value == 10) printf("\x1b[30m%s%d %c   \x1b[0m  ", colors[temp->special], value, filler);
+      else printf("\x1b[30m%s   %c   \x1b[0m  ", colors[temp->special], filler);
       temp = temp -> right;
     }
-    printf("\x1b[30m%s   %c   \x1b[0m\n", colors[temp->special], filler);
+    if(i != 2) printf("\x1b[30m%s   %c   \x1b[0m\n", colors[temp->special], filler);
+    else if(value < 10) printf("\x1b[30m%s%d  %c   \x1b[0m\n", colors[temp->special], value, filler);
+    else if(value == 10) printf("\x1b[30m%s%d %c   \x1b[0m\n", colors[temp->special], value, filler);
+    else printf("\x1b[30m%s   %c   \x1b[0m\n", colors[temp->special], filler);
   }
   printf("\n");
 }
@@ -157,3 +166,14 @@ struct node * remove_node(struct node *start, int index){ //for tiles only
   free(target);
   return start;
 }
+
+/*
+int search(struct node* start, char* letters){
+  int i, j, is_used[7] = {0,0,0,0,0,0,0};
+  for(i = 0; i < sizeof(letters)/sizeof(char); i++){
+    for(j = 0; j < 7; j++){
+      if(letters[i] == get_char_value(start, j))
+    }
+  }
+}
+*/

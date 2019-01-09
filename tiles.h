@@ -1,4 +1,4 @@
-struct node* tiles_setup();
+//struct node** tiles_setup(int player_num);
 
 int get_letter_value(char c);
 

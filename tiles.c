@@ -5,14 +5,11 @@
 #include "tiles.h"
 #include "linkedlist.h"
 
-struct node* tiles_setup(){
+/*
+struct node* tiles_setup(int player_num){
   struct node* letter_list = generate_all_tiles();
-  struct node* player_tiles = generate_initial_player_tiles(&letter_list);
-  printf("\n\nPlayer 1's Tiles\n\n");
-  print_board_list(player_tiles, 1);
-  printf("\n");
-  return player_tiles;
-}
+
+}*/
 
 struct node* generate_all_tiles(){
   int i,j;
@@ -47,11 +44,12 @@ int get_letter_value(char c){
   int letter_values[26] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
                          //a b c d e f g h i j k l m n o p q  r s t u v w x y z
 
-  return letter_values[c - 'a'];
+  return letter_values[c - 'A'];
 }
 
 void print_letter_values(){
-    printf("a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q  | r | s | t | u | v | w | x | y | z |\n");
-    printf("-------------------------------------------------------------------------------------------------------|\n");
-    printf("1 | 3 | 3 | 2 | 1 | 4 | 2 | 4 | 1 | 8 | 5 | 1 | 3 | 1 | 1 | 3 | 10 | 1 | 1 | 1 | 1 | 4 | 4 | 8 | 4 | 10|\n");
+    printf("\tPoint values for each letter:\n");
+    printf("\ta | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q  | r | s | t | u | v | w | x | y | z |\n");
+    printf("\t-------------------------------------------------------------------------------------------------------|\n");
+    printf("\t1 | 3 | 3 | 2 | 1 | 4 | 2 | 4 | 1 | 8 | 5 | 1 | 3 | 1 | 1 | 3 | 10 | 1 | 1 | 1 | 1 | 4 | 4 | 8 | 4 | 10|\n\n");
 }
