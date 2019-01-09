@@ -1,21 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 
-int static valid_word(char[] word){
-	FILE *file;
-	file = fopen("dict.txt","r");
-	char** dict[58110]
-	for (int i = 0; i < 58810; i++){
-		fscanf(file, "%s",dict[i]);
-	}
-	return binary_search(dict,word)
-}
-
-int static binary_search(char[] dict, char[] word){
+int static binary_search(char **dict, char *word){
 	int lb, mid, ub;
     lb = 0;                             
-    ub = n;                             
+    ub = 58810;                             
     do
     {
         mid = (lb + ub) / 2;             
@@ -35,3 +25,21 @@ int static binary_search(char[] dict, char[] word){
  	}
 }
 
+int static valid_word(char *word){
+    FILE *file;
+
+    file = fopen("dict.txt","r");
+    char **dict = calloc(58110, sizeof(char *));
+    printf("HI I AM HERE\n");
+    for (int i = 0; i < 58810; i++){
+
+        fgets(dict[i],10,file);
+    }
+    printf("HI I AM HERE\n");
+    return binary_search(dict,word);
+}
+
+int main(){
+    printf("%d\n",valid_word("crystal"));
+    return 0;
+}
