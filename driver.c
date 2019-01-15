@@ -17,7 +17,8 @@
 
 int main(){
   struct node *start;
-  struct Player** all_players = setup(&start, 4);
+  struct node* letter_list = generate_all_tiles();
+  struct Player** all_players = setup(&start, 4, &letter_list);
 
   while(1){
     print_board(start);
@@ -38,7 +39,8 @@ int main(){
       printf("\t\tWhat would you like to do? Enter an option from below:\n");
       printf("\t\t(1) Add a word to the board\n");
       printf("\t\t(2) See the manual\n");
-      printf("\t\t(3) Pass my turn\n\n");
+      printf("\t\t(3) Pass my turn\n");
+      printf("\t\t(4) See the board\n\n");
       //printf("\t\t()\n");
       printf("\t\tI want to chose option ");
       fgets(buf, 15, stdin);
@@ -83,12 +85,84 @@ int main(){
           letters[ary_counter] = '\0';
           //printf("%s\n", letters);
           if(search_word(get_tiles(player), letters)){
-            int counter = 0;
-            for(counter; counter < strlen(letters); counter++){
-              //REMOVE TILES FROM PLAYERS
-            }
-
+            //printf("those words are valid! removing tiles now... \n");
+            //remove tiles from player
+            if(remove_tiles(player, letters, &letter_list)) printf("ERROR REMOVING TILES");
             //ADD LETTERS TO BOARD
+            else{
+              //printf("tiles removed!\n\n new tiles\n");
+              print_tiles(player, player_num);
+              //struct node* starting_node = get_node(start, i, j);
+              int k;
+              //printf("added this word: [%s], length is %ld\n", word, strlen(word) -1 );
+              for(k = 0; k < strlen(word) - 1; k++){
+                //printf("changing tile at row %d, col %d to %c", j+k, i, word[k]);
+                change_char_value(start, i, j+k, word[k]);
+              }
+              print_board(start);
+              //printf("finished changing the board!\n");
+            }
+          }
+          else{
+            printf("\t\tYou do not have the tiles for this addition!\n\n");
+            buf[0] = '2';
+          }
+        }
+        else if(buf[0] == '2'){
+          char square[3], word[15];
+          int i = 16, j = 16;
+          printf("\n\t\tWhich square marks the beginning of your word? Please answer number first then the letter\n");
+          printf("\t\te.g. 8G, 7H, 14A\n");
+          printf("\t\tMy word begins at square ");
+          fgets(square, 15, stdin);
+          if(square[2] == '\n'){
+            i = square[1] - 'A';
+            j = square[0] - '0';
+          }
+          else if(square[3] == '\n'){
+            i = square[2] - 'A';
+            j = square[1] - '0' + 10;
+          }
+          //printf("\n\t\tYour square has been determined as row %d, column %d\n", j, i);
+          printf("\n\t\tWhat word would you like to form?\n");
+          printf("\t\tMy word is ");
+          fgets(word, 15, stdin);
+
+          char letters[15];
+          int counter = 0, ary_counter = 0;
+          for(counter; counter < 15 && word[counter] != '\n'; counter++){
+            char current_char = get_vertical_char_value(get_node(start, i+counter, j), 0);
+            char desired_char = word[counter];
+            if(current_char != desired_char){
+              //printf("in here!\n");
+              //char a = *letters_copy, b = *comparison;
+              //a = b;
+              letters[ary_counter] = word[counter];
+              ary_counter++;
+              //printf("finished in here!\n");
+            }
+          }
+          letters[ary_counter] = '\0';
+          //printf("%s\n", letters);
+          if(search_word(get_tiles(player), letters)){
+            
+            //printf("those words are valid! removing tiles now... \n");
+            //remove tiles from player
+            if(remove_tiles(player, letters, &letter_list)) printf("ERROR REMOVING TILES");
+            //ADD LETTERS TO BOARD
+            else{
+              //printf("tiles removed!\n\n new tiles\n");
+              print_tiles(player, player_num);
+              //struct node* starting_node = get_node(start, i, j);
+              int k;
+              //printf("added this word: [%s], length is %ld\n", word, strlen(word) -1 );
+              for(k = 0; k < strlen(word) - 1; k++){
+                //printf("changing tile at row %d, col %d to %c", j+k, i, word[k]);
+                change_char_value(start, i+k, j, word[k]);
+              }
+              print_board(start);
+              //printf("finished changing the board!\n");
+            }
           }
           else{
             printf("\t\tYou do not have the tiles for this addition!\n\n");
@@ -98,6 +172,7 @@ int main(){
       }
       else if(buf[0] == '2') print_info();
       else if(buf[0] == '3') buf[0] = '1';
+      else if(buf[0] == '4') print_board(start);
     }
     printf("\n\n\t\t-------------PLAYER %d'S TURN HAS ENDED-------------\n\n", player_num);
   }

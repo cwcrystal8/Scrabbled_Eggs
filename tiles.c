@@ -4,6 +4,7 @@
 
 #include "tiles.h"
 #include "linkedlist.h"
+#include "player.h"
 
 /*
 struct node* tiles_setup(int player_num){
@@ -37,6 +38,7 @@ struct node* generate_initial_player_tiles(struct node** letter_list){
     char new_c = get_random_tile(letter_list);
     player_tiles = insert(player_tiles, new_c, 0, 0);
   }
+  //print_board_list(get_node(player_tiles, -6, 0), 1);
   return get_node(player_tiles, -6, 0);
 }
 

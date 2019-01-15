@@ -7,7 +7,7 @@
 #include "board.h"
 #include "player.h"
 
-struct Player** setup(struct node** start, int num_players){
+struct Player** setup(struct node** start, int num_players, struct node** letter_list){
   *start = board_setup();
 
   /* //TESTING PURPOSES ONLY -- REMOVE LATER
@@ -19,12 +19,12 @@ struct Player** setup(struct node** start, int num_players){
     }
   }
   //END OF TESTING CODE*/
-  print_board(*start);
+  //print_board(*start);
 
   struct Player** all_players = calloc(num_players, sizeof(struct Player*));
-  struct node* letter_list = generate_all_tiles();
+  //struct node* letter_list = generate_all_tiles();
   while(num_players > 0){
-      all_players[num_players - 1] = create_player(&letter_list);
+      all_players[num_players - 1] = create_player(letter_list);
       num_players--;
   }
   //print_info();
