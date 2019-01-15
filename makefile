@@ -1,5 +1,5 @@
-all: driver.o linkedlist.o game_setup.o tiles.o board.o player.o
-	gcc -o runthis driver.o linkedlist.o game_setup.o tiles.o board.o player.o
+all: driver.o linkedlist.o game_setup.o tiles.o board.o player.o dict.o
+	gcc -o runthis driver.o linkedlist.o game_setup.o tiles.o board.o player.o dict.o
 
 driver.o: driver.c driver.h
 	gcc -c driver.c
@@ -19,6 +19,9 @@ board.o: board.c board.h
 player.o: player.c player.h
 	gcc -c player.c
 
+dict.o: dict.c dict.h
+	gcc -c dict.c
+	
 run:
 	./runthis
 

@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "linkedlist.h"
 #include "tiles.h"
+#include "dict.h"
 
 struct node {
   char c;
@@ -25,6 +27,21 @@ struct node* get_node(struct node *start, int i, int j){
 char get_char_value(struct node *start, int index){//for tiles only
   struct node* temp = get_node(start, index, 0);
   return temp->c;
+}
+
+char get_vertical_char_value(struct node *start, int index){
+  struct node* temp = get_node(start, 0, index);
+  return temp->c;
+}
+
+int get_vertical_length(struct node *start){
+  int ans = 0;
+  struct node* temp = start;
+  while(temp){
+    ans++;
+    temp = temp->down;
+  }
+  return ans;
 }
 
 int get_length(struct node* start){//for tiles only
@@ -167,12 +184,17 @@ struct node * remove_node(struct node *start, int index){ //for tiles only
   return start;
 }
 
-int search_word(struct node* start, char* letters){
-  int i, j, is_used[7] = {0,0,0,0,0,0,0}, is_here = 0;
-  for(i = 0; i < sizeof(letters)/sizeof(char); i++){
+int search_word(struct node* start, char* letters){ //start is player tiles, letters is letters that we are looking for
+  int i, j, length = get_length(start), is_used[length], is_here = 0;
+  for(i = 0; i < length; i++){
+    is_used[i] = 0;
+  }
+  for(i = 0; i < strlen(letters); i++){
     is_here = 0;
-    for(j = 0; j < 7; j++){
-      if(letters[i] == get_char_value(start, j) && !is_used[j]) {
+    //printf("i: %d\n", i);
+    for(j = 0; j < length; j++){
+      //printf("\tj: %d, looking for: %c, current char: %c, is_used[j]: %d, is_here:%d\n", j, letters[i], get_char_value(start, j), is_used[j], is_here);
+      if(letters[i] == get_char_value(start, j) && !is_used[j] && !is_here) {
         is_used[j] = 1;
         is_here = 1;
       }
@@ -180,4 +202,27 @@ int search_word(struct node* start, char* letters){
     if(!is_here) return 0;
   }
   return 1;
+}
+
+int check_word_validity(struct node* start, int direction){
+  //direction 0: horizontal, 1: vertical
+  int i, length;
+  char word[16];
+  if(!direction) length = get_length(start);
+  else length = get_vertical_length(start);
+
+  for(i = 0; i < length; i++){
+    if(!direction) word[i] = get_char_value(start, i);
+    else word[i] = get_vertical_char_value(start, i);
+  }
+  word[i] = '\0';
+  //printf("\tthe word is %s, the length is %d, i is %d\n", word, length, i);
+
+  //check if word is real, returns 1 if real, 0 if not
+  return valid_word(word);
+}
+
+int check_all_words_validity(struct node* start, int direction){
+  //direction: 0 is horizontal, 1 is vertical
+
 }

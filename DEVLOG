@@ -16,12 +16,31 @@ pd 4
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
+1/14/19 (Crystal)
+Finished:
+- Searching if added letters is in player tiles is now an option
+- Searching for all added words and checking their validity is now an option
+- Incorporated dict.c into linkedlist.c
+
+
+---------
+
+
+1/10/19 (Robin)
+Finished:
+- Wrote dictionary file to check if inputted words are actual English words
+
+
+---------
+
+
 1/9/19 (Crystal)
 Finished:
 - Player tile generation supports multiple players
 - Print_info available for player
 - Added letter values on each tile
 - Scrabble board can now be empty
+
 
 ---------
 

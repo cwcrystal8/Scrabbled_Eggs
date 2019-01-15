@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+int binary_search(char **dict, char *word);
 
-char** get_dict();
+int stupid_search(char *word);
+
+int valid_word(char *word);
