@@ -30,6 +30,7 @@ Finished:
 Finished:
 - Wrote dictionary file to check if inputted words are actual English words
 
+Notes: search is linear O(n) right now (time: ~1s); if we have time, we want to implement a binary search
 
 ---------
 
