@@ -9,7 +9,8 @@
 
 struct Player** setup(struct node** start, int num_players){
   *start = board_setup();
-  //TESTING PURPOSES ONLY -- REMOVE LATER
+
+  /* //TESTING PURPOSES ONLY -- REMOVE LATER
 
   int i, j;
   for(i = 0; i < 15; i++){
@@ -17,7 +18,7 @@ struct Player** setup(struct node** start, int num_players){
       change_char_value(*start, i, j, 'A');
     }
   }
-  //END OF TESTING CODE
+  //END OF TESTING CODE*/
   print_board(*start);
 
   struct Player** all_players = calloc(num_players, sizeof(struct Player*));
@@ -26,7 +27,7 @@ struct Player** setup(struct node** start, int num_players){
       all_players[num_players - 1] = create_player(&letter_list);
       num_players--;
   }
-  print_info();
+  //print_info();
   return all_players;
 }
 

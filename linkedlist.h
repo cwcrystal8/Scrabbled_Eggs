@@ -31,3 +31,7 @@ int search_word(struct node* start, char* letters);
 int check_word_validity(struct node* start, int direction);
 
 int check_all_words_validity(struct node* start, int direction);
+
+int get_horizontal_word(struct node* start);
+
+int get_vertical_word(struct node* start);
