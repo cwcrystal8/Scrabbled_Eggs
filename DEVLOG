@@ -21,8 +21,10 @@ Finished:
 - Searching if added letters is in player tiles is now an option
 - Searching for all added words and checking their validity is now an option
 - Incorporated dict.c into linkedlist.c
+- Driver asks for user input and responds
+- Algorithm to check which letters must be added written
 
-Notes: eventually, want to include print message that tells player of the errors
+Notes: eventually, want to include print message that tells player of the errors, also want to add a "How to Play"
 
 ---------
 

@@ -72,6 +72,15 @@ void change_special_value(struct node *start, int i, int j, char new_value){
   temp->special = new_value;
 }
 
+int get_special_value(struct node *start, int i, int j){
+  struct node *temp = start;
+  for(i; i > 0; i--) temp = temp -> right;
+  for(j; j > 0; j--) temp = temp -> down;
+  for(i; i < 0; i++) temp = temp -> left;
+  for(j; j < 0; j++) temp = temp -> up;
+  return temp->special;
+}
+
 void print_list(struct node *current){
   printf("[");
   while((current -> right) != NULL){
@@ -103,13 +112,13 @@ void print_board_list(struct node* current, int place){
       if(i == 1 && temp->c != '\0') filler = temp -> c;
       else filler = ' ';
       if(i != 2) printf("\x1b[30m%s   %c   \x1b[0m  ", colors[temp->special], filler);
-      else if(value < 10) printf("\x1b[30m%s%d  %c   \x1b[0m  ", colors[temp->special], value, filler);
+      else if(value > 0 && value < 10) printf("\x1b[30m%s%d  %c   \x1b[0m  ", colors[temp->special], value, filler);
       else if(value == 10) printf("\x1b[30m%s%d %c   \x1b[0m  ", colors[temp->special], value, filler);
       else printf("\x1b[30m%s   %c   \x1b[0m  ", colors[temp->special], filler);
       temp = temp -> right;
     }
     if(i != 2) printf("\x1b[30m%s   %c   \x1b[0m\n", colors[temp->special], filler);
-    else if(value < 10) printf("\x1b[30m%s%d  %c   \x1b[0m\n", colors[temp->special], value, filler);
+    else if(value > 0 && value < 10) printf("\x1b[30m%s%d  %c   \x1b[0m\n", colors[temp->special], value, filler);
     else if(value == 10) printf("\x1b[30m%s%d %c   \x1b[0m\n", colors[temp->special], value, filler);
     else printf("\x1b[30m%s   %c   \x1b[0m\n", colors[temp->special], filler);
   }
@@ -186,6 +195,7 @@ struct node * remove_node(struct node *start, int index){ //for tiles only
 
 int search_word(struct node* start, char* letters){ //start is player tiles, letters is letters that we are looking for
   int i, j, length = get_length(start), is_used[length], is_here = 0;
+  if(strlen(letters) > length) return 0;
   for(i = 0; i < length; i++){
     is_used[i] = 0;
   }

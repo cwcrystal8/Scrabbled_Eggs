@@ -12,6 +12,8 @@ void change_char_value(struct node *start, int i, int j, char new_value);
 
 void change_special_value(struct node *start, int i, int j, char new_value);
 
+int get_special_value(struct node *start, int i, int j);
+
 struct node* get_node(struct node *start, int i, int j);
 
 struct node * remove_node(struct node *start, int index);

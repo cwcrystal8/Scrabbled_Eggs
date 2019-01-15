@@ -1,5 +1,11 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <errno.h>
+#include <limits.h>
+#include <fcntl.h>
 #include <time.h>
 
 #include "linkedlist.h"
@@ -12,6 +18,91 @@
 int main(){
   struct node *start;
   struct Player** all_players = setup(&start, 4);
+
+  while(1){
+    print_board(start);
+    printf("\t\tWhich player is up? Enter 1, 2, 3, or 4 to select the player. Enter 5 to exit.\n");
+    char buf[15];
+    printf("\t\t");
+    fgets(buf, 15, stdin);
+
+    if(buf[0] == '5') break;
+
+    int player_num = buf[0] - '0';
+    printf("\n\t\t-------------PLAYER %d's TURN HAS BEGUN-------------\n\n", player_num);
+    struct Player *player = all_players[player_num - 1];
+    print_tiles(player, player_num);
+
+    buf[0] = 0;
+    while(buf[0] != '1'){
+      printf("\t\tWhat would you like to do? Enter an option from below:\n");
+      printf("\t\t(1) Add a word to the board\n");
+      printf("\t\t(2) See the manual\n");
+      printf("\t\t(3) Pass my turn\n\n");
+      //printf("\t\t()\n");
+      printf("\t\tI want to chose option ");
+      fgets(buf, 15, stdin);
+      if(buf[0] == '1'){
+        printf("\n\t\tWould you like to add tiles (1) vertically or (2) horizontally?\n");
+        printf("\t\tI want to chose option ");
+        fgets(buf, 15, stdin);
+        if(buf[0] == '1'){
+          char square[3], word[15];
+          int i = 16, j = 16;
+          printf("\n\t\tWhich square marks the beginning of your word? Please answer number first then the letter\n");
+          printf("\t\te.g. 8G, 7H, 14A\n");
+          printf("\t\tMy word begins at square ");
+          fgets(square, 15, stdin);
+          if(square[2] == '\n'){
+            i = square[1] - 'A';
+            j = square[0] - '0';
+          }
+          else if(square[3] == '\n'){
+            i = square[2] - 'A';
+            j = square[1] - '0' + 10;
+          }
+          //printf("\n\t\tYour square has been determined as row %d, column %d\n", j, i);
+          printf("\n\t\tWhat word would you like to form?\n");
+          printf("\t\tMy word is ");
+          fgets(word, 15, stdin);
+
+          char letters[15];
+          int counter = 0, ary_counter = 0;
+          for(counter; counter < 15 && word[counter] != '\n'; counter++){
+            char current_char = get_vertical_char_value(get_node(start, i, j+counter), 0);
+            char desired_char = word[counter];
+            if(current_char != desired_char){
+              //printf("in here!\n");
+              //char a = *letters_copy, b = *comparison;
+              //a = b;
+              letters[ary_counter] = word[counter];
+              ary_counter++;
+              //printf("finished in here!\n");
+            }
+          }
+          letters[ary_counter] = '\0';
+          //printf("%s\n", letters);
+          if(search_word(get_tiles(player), letters)){
+            int counter = 0;
+            for(counter; counter < strlen(letters); counter++){
+              //REMOVE TILES FROM PLAYERS
+            }
+
+            //ADD LETTERS TO BOARD
+          }
+          else{
+            printf("\t\tYou do not have the tiles for this addition!\n\n");
+            buf[0] = '2';
+          }
+        }
+      }
+      else if(buf[0] == '2') print_info();
+      else if(buf[0] == '3') buf[0] = '1';
+    }
+    printf("\n\n\t\t-------------PLAYER %d'S TURN HAS ENDED-------------\n\n", player_num);
+  }
+
+
 
 
   /*
@@ -35,8 +126,8 @@ int main(){
   print_board(start);
 
 
-  if(check_all_words_validity(get_node(start, 0, 0), 0)) printf("error!\n");
-  else printf("success!\n");
+  if(check_all_words_validity(get_node(start, 0, 0), 0)) printf("\t\terror!\n");
+  else printf("\t\tsuccess!\n");
   */
 
   /*struct node *random = insert(NULL, 'z', 0, 0), *temp = random;
@@ -53,8 +144,8 @@ int main(){
   //  random = insert(random, i + 'a', 0, 0);
   //}
 
-  if(check_word_validity(temp, 0)) printf("word is real!\n");
-  else printf("word is not real!\n");
+  if(check_word_validity(temp, 0)) printf("\t\tword is real!\n");
+  else printf("\t\tword is not real!\n");
   */
 
 
