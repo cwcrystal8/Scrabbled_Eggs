@@ -50,8 +50,8 @@ int get_letter_value(char c){
 }
 
 void print_letter_values(){
-    printf("\tPoint values for each letter:\n");
-    printf("\ta | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q  | r | s | t | u | v | w | x | y | z |\n");
-    printf("\t-------------------------------------------------------------------------------------------------------|\n");
-    printf("\t1 | 3 | 3 | 2 | 1 | 4 | 2 | 4 | 1 | 8 | 5 | 1 | 3 | 1 | 1 | 3 | 10 | 1 | 1 | 1 | 1 | 4 | 4 | 8 | 4 | 10|\n\n");
+    printf("\t\tPoint values for each letter:\n");
+    printf("\t\ta | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q  | r | s | t | u | v | w | x | y | z |\n");
+    printf("\t\t-------------------------------------------------------------------------------------------------------|\n");
+    printf("\t\t1 | 3 | 3 | 2 | 1 | 4 | 2 | 4 | 1 | 8 | 5 | 1 | 3 | 1 | 1 | 3 | 10 | 1 | 1 | 1 | 1 | 4 | 4 | 8 | 4 | 10|\n\n");
 }

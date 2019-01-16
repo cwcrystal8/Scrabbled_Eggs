@@ -31,8 +31,8 @@ void print_tiles(struct Player* player, int player_num){
   for(i = 0; i < 3; i++){
     struct node* temp = player->tiles;
     char filler = ' ', letter = get_char_value(temp, 0);
-    if(i != 1) printf("                  ");
-    else printf("Player %d's Tiles: ", player_num);
+    if(i != 1) printf("\t\t                  ");
+    else printf("\t\tPlayer %d's Tiles: ", player_num);
     int value = get_letter_value(letter), special;
     while(temp){
       letter = get_char_value(temp, 0);

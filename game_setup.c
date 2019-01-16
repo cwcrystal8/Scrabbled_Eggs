@@ -32,13 +32,13 @@ struct Player** setup(struct node** start, int num_players, struct node** letter
 }
 
 void print_info(){
-  printf("\t------GAME INFO------\n\n");
+  printf("\t\t------GAME INFO------\n\n");
   print_board_info();
   print_letter_values();
 }
 
 void print_board_info(){
-  printf("\n\tSpecial Squares Key\n\n");
+  printf("\n\t\tSpecial Squares Key\n\n");
   char *colors[6], *key[6];
   colors[0] = "\x1b[107m";
   colors[1] = "\x1b[104m";
@@ -55,7 +55,7 @@ void print_board_info(){
   int j, i;
   for(j = 0; j < 6; j++){
     for(i = 0; i < 3; i++){
-        printf("\t");
+        printf("\t\t");
         if (i == 1) printf("\x1b[30m%s      \x1b[0m = %s\n", colors[j], key[j]);
         else printf("\x1b[30m%s      \x1b[0m  \n", colors[j]);
     }
