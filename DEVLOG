@@ -16,6 +16,17 @@ pd 4
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
+1/15/19 (Crystal)
+Finished:
+- User can now play scrabble among players locally
+- Supports word additions
+- Checks validity of words
+- Removes tiles and adds them
+
+
+---------
+
+
 1/14/19 (Crystal)
 Finished:
 - Searching if added letters is in player tiles is now an option
@@ -26,6 +37,7 @@ Finished:
 
 Notes: eventually, want to include print message that tells player of the errors, also want to add a "How to Play"
 
+
 ---------
 
 
@@ -34,6 +46,7 @@ Finished:
 - Wrote dictionary file to check if inputted words are actual English words
 
 Notes: search is linear O(n) right now (time: ~1s); if we have time, we want to implement a binary search
+
 
 ---------
 
