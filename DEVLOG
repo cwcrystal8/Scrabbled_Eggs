@@ -22,6 +22,9 @@ Finished:
 - Supports word additions
 - Checks validity of words
 - Removes tiles and adds them
+- Program cycles through each player, and player's turn ends when they add a words
+
+Notes: just missing word checker, networking, and point scores
 
 
 ---------

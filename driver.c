@@ -238,6 +238,3 @@ int main(){
   }
   return 0;
 }
-
-//fix weird buf[0] != 1???
-//add checking word validity
