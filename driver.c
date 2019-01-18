@@ -18,28 +18,34 @@
 //\e[1;1H\e[2J is the clear screen function
 //\x1b[106m is light cyan
 //\x1b[102m is light green
-
+//\x1b[0m is return to normal
 
 int main(){
+  int round_num = 1;
   struct node *start;
   struct node* letter_list = generate_all_tiles();
   printf("\e[1;1H\e[2J\n\n");
   char num[3];
+  num[0] = '0';
   printf("\t\t~~~~~~~~~~~~~~~~~~~~~~~~Welcome to Scrabbled Eggs!~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
-  printf("\t\tHow many players are there?\n\n\t\tThe # of players is ");
-  fgets(num, 3, stdin);
-
+  while (num[0] - '0' < 1 ||  num[0] - '0' > 4){
+    printf("\t\tHow many players are there?\n\n\t\tThe # of players is ");
+    fgets(num, 3, stdin);
+    if(num[0] - '0' < 1 ||  num[0] - '0' > 4){
+      printf("\n\t\tYou must enter a number between 1 and 4, inclusive!\n\n\n\t\t-----------\n\n\n");
+    }
+  }
   struct Player** all_players = setup(&start, num[0] - '0', &letter_list);
 
   while(1){
-    printf("\e[1;1H\e[2J\n\n");
-    print_board(start);
+    printf("\x1b[0m\e[1;1H\e[2J\n\n");
     /*
     printf("\t\tWhose turn is it? Please enter an option from below without the parentheses.\n");
     int l;
     for(l = 1; l <= num[0] - '0'; l++) printf("\t\t(%d) Player %d\n", l, l);
     printf("\t\t(%d) Exit the game\n\n", l);
     char buf[15];
+
     printf("\t\tI chose ");
     fgets(buf, 15, stdin);
 
@@ -52,6 +58,7 @@ int main(){
     for(player_num = 1; player_num; player_num = (player_num) % (num[0] - '0') + 1){
       printf("\e[1;1H\e[2J\n\n");
       printf("\n\t\t-------------PLAYER %d's TURN HAS BEGUN-------------\n\n", player_num);
+      print_board(start);
       struct Player *player = all_players[player_num - 1];
       print_tiles(player, player_num);
 
@@ -83,17 +90,24 @@ int main(){
             char square[3], word[15];
             int i = 16, j = 16;
             print_board(start);
-            printf("\n\t\tWhich square marks the beginning of your word? Please answer number first then the letter\n");
-            printf("\t\te.g. 8G, 7H, 14A\n\n");
-            printf("\t\tMy word begins at square ");
-            fgets(square, 15, stdin);
-            if(square[2] == '\n'){
-              i = square[1] - 'A';
-              j = square[0] - '0';
+            if(player_num == 1 && round_num == 1){
+              printf("\t\tYou must start at the center square (7H)!\n");
+              i =  7;
+              j = 7;
             }
-            else if(square[3] == '\n'){
-              i = square[2] - 'A';
-              j = square[1] - '0' + 10;
+            else{
+              printf("\n\t\tWhich square marks the beginning of your word? Please answer number first then the letter\n");
+              printf("\t\te.g. 8G, 7H, 14A\n\n");
+              printf("\t\tMy word begins at square ");
+              fgets(square, 15, stdin);
+              if(square[2] == '\n'){
+                i = square[1] - 'A';
+                j = square[0] - '0';
+              }
+              else if(square[3] == '\n'){
+                i = square[2] - 'A';
+                j = square[1] - '0' + 10;
+              }
             }
             //printf("\n\t\tYour square has been determined as row %d, column %d\n", j, i);
             printf("\n");
@@ -158,17 +172,24 @@ int main(){
             char square[3], word[15];
             int i = 16, j = 16;
             print_board(start);
-            printf("\n\t\tWhich square marks the beginning of your word? Please answer number first then the letter\n");
-            printf("\t\te.g. 8G, 7H, 14A\n\n");
-            printf("\t\tMy word begins at square ");
-            fgets(square, 15, stdin);
-            if(square[2] == '\n'){
-              i = square[1] - 'A';
-              j = square[0] - '0';
+            if(player_num == 1 && round_num == 1){
+              printf("\t\tYou must start at the center square (7H)!\n");
+              i = 7;
+              j = 7;
             }
-            else if(square[3] == '\n'){
-              i = square[2] - 'A';
-              j = square[1] - '0' + 10;
+            else{
+              printf("\n\t\tWhich square marks the beginning of your word? Please answer number first then the letter\n");
+              printf("\t\te.g. 8G, 7H, 14A\n\n");
+              printf("\t\tMy word begins at square ");
+              fgets(square, 15, stdin);
+              if(square[2] == '\n'){
+                i = square[1] - 'A';
+                j = square[0] - '0';
+              }
+              else if(square[3] == '\n'){
+                i = square[2] - 'A';
+                j = square[1] - '0' + 10;
+              }
             }
             //printf("\n\t\tYour square has been determined as row %d, column %d\n", j, i);
             printf("\n");
@@ -235,6 +256,7 @@ int main(){
       }
       printf("\n\n\t\t-------------PLAYER %d'S TURN HAS ENDED-------------\n\n", player_num);
     }
+    round_num++;
   }
   return 0;
 }
