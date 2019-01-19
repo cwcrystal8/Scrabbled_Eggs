@@ -153,46 +153,56 @@ int main(){
                 //print_tiles(player, player_num);
                 //struct node* starting_node = get_node(start, i, j);
                 int k;
-                /*
+                //printf("HERE");
                 int additional_score = 0;
                 int original_score = 0;
                 int plain_score = 0;
                 int multi = 1;
-                */
                 //printf("added this word: [%s], length is %ld\n", word, strlen(word) -1 );
                 for(k = 0; k < strlen(word); k++){
                   //printf("changing tile at row %d, col %d to %c", j+k, i, word[k]);
+                  //VERTICAL
+                  //printf("before");
                   change_char_value(start, i, j+k, word[k]);
-                  /*
-                  if (word[k] == old_word[k]){
+                  if (word[k] != old_word[k]){
+                    //printf("WORD %d \n ", word[k]);
                     additional_score += get_letter_value(word[k]);
                   }
                   else{
-                    additional_score += add_new_word_points(start,1);
+                    additional_score += add_new_word_points(start,i,j+k,1);
                   }
+                  printf("additional_score %d \n ", additional_score);
+                  
                   // getting original score of placed tiles including bonuses
-                  if (get_special_value(get_node(start,i,j),i,j) == 1){
+                  if (get_special_value(get_node(start,i,j+k),0,0) == 0){
+                    plain_score += get_letter_value(word[k]);
+                    original_score +=  get_letter_value(word[k]);
+                  }
+                  if (get_special_value(get_node(start,i,j+k),0,0) == 1){
                     plain_score += get_letter_value(word[k]);
                     original_score +=  2 * get_letter_value(word[k]);
                   }
-                  else if(get_special_value(get_node(start,i,j),i,j) == 2) {
+                  else if(get_special_value(get_node(start,i,j+k),0,0) == 2) {
                     plain_score += get_letter_value(word[k]);
                     original_score += 3* get_letter_value(word[k]);
                   }
-                  else if (get_special_value(get_node(start,i,j),i,j) == 3){
+                  else if (get_special_value(get_node(start,i,j+k),0,0) == 3){
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 2;
                   }
-                  else if (get_special_value(get_node(start,i,j),i,j) == 4){
+                  else if (get_special_value(get_node(start,i,j+k),0,0) == 4){
+                    printf("%d \n ",3);
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 3;
                   }
-                  */
+                  
+                  //printf("im here 1");
+                  
                 }
-                //int total_score = additional_score - plain_score + (original_score * multi);
 
+                int total_score = additional_score - plain_score + (original_score * multi);
                 if(check_all_words_validity(get_node(start, i, j), 1)){
                   //printf("\e[1;1H\e[2J\n");
                   //printf("\n\t\tError: You must enter a valid word!\n");
@@ -209,7 +219,7 @@ int main(){
                       change_special_value(start, i, j + k, 6);
                     }
                     is_turn = 0;
-                    //set_score(player,get_score(player) + total_score);
+                    set_score(player,get_score(player) + total_score);
                     print_board(start);
                     center_is_empty = 0;
                   }
@@ -292,48 +302,48 @@ int main(){
                 //print_tiles(player, player_num);
                 //struct node* starting_node = get_node(start, i, j);
                 int k;
-                /*
                 int additional_score = 0;
                 int original_score = 0;
                 int plain_score = 0;
                 int multi = 1;
-                */
                 //printf("added this word: [%s], length is %ld\n", word, strlen(word) -1 );
                 for(k = 0; k < strlen(word); k++){
                   //printf("changing tile at row %d, col %d to %c", j+k, i, word[k]);
                   change_char_value(start, i+k, j, word[k]);
-                  //checking for vertical words
-                  // getting new code
-                  /*
-                  if (word[k] == old_word[k]){
+                  if (word[k] != old_word[k]){
                     additional_score += get_letter_value(word[k]);
                   }
+
                   else{
-                    additional_score += add_new_word_points(start,0);
+                    additional_score += add_new_word_points(start,i+k,j,0);
                   }
-                  // getting original score of placed tiles including bonuses
-                  if (get_special_value(get_node(start,i,j),i,j) == 1){
+                  
+                  if (get_special_value(get_node(start,i+k,j),0,0) == 0){
+                    plain_score += get_letter_value(word[k]);
+                    original_score +=  get_letter_value(word[k]);
+                  }
+                  if (get_special_value(get_node(start,i+k,j),0,0) == 1){
                     plain_score += get_letter_value(word[k]);
                     original_score +=  2 * get_letter_value(word[k]);
                   }
-                  else if(get_special_value(get_node(start,i,j),i,j) == 2) {
+                  else if(get_special_value(get_node(start,i+k,j),0,0) == 2) {
                     plain_score += get_letter_value(word[k]);
                     original_score += 3* get_letter_value(word[k]);
                   }
-                  else if (get_special_value(get_node(start,i,j),i,j) == 3){
+                  else if (get_special_value(get_node(start,i+k,j),0,0) == 3){
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 2;
                   }
-                  else if (get_special_value(get_node(start,i,j),i,j) == 4){
+                  else if (get_special_value(get_node(start,i+k,j),0,0) == 4){
+                    printf("%d \n ",3);
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 3;
                   }
-                  */
-                }
-                //int total_score = additional_score - plain_score + (original_score * multi);
-                // TOTAL SCORE IS HERE
+                  
+                }            
+                int total_score = additional_score - plain_score + (original_score * multi);
                 if(check_all_words_validity(get_node(start, i, j), 0)){
                   //printf("\e[1;1H\e[2J\n");
                   printf("\n\t\tError: You must enter a valid word!\n\n");
@@ -341,7 +351,6 @@ int main(){
                     //printf("changing tile at row %d, col %d to %c", j+k, i, old_word[k]);
                     change_char_value(start, i+k, j, old_word[k]);
                   }
-
                 }
                 else{
                   if(remove_tiles(player, letters, &letter_list)) printf("ERROR REMOVING TILES");
@@ -352,8 +361,8 @@ int main(){
                       change_special_value(start, i+k, j, 6);
                     }
                     is_turn = 0;
+                    set_score(player,get_score(player) + total_score);
                     center_is_empty = 0;
-                    //set_score(player,get_score(player) + total_score);
                     print_board(start);
                   }
                 }
@@ -380,7 +389,8 @@ int main(){
           exit(0);
         }
       }
-      printf("\n\n\t\t-------------PLAYER %d'S TURN HAS ENDED-------------\n\n", player_num);
+      printf("\n\n\t\t-------------PLAYER %d'S TURN HAS ENDED-------------\n\n\n", player_num);
+      printf("\t\t Player %d now has %d points\n", player_num, get_score(player));
     }
   }
   return 0;

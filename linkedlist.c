@@ -8,7 +8,7 @@
 
 struct node {
   char c;
-  int special; //0 is regular, 1 is double letter, 2 is triple letter, 3 is double word, 4 is triple word
+  int special; //0 is regular, 1 is double letter, 2 is triple letter, 3 is double word, 4 is triple word, 5 is starting tile, 6 is a placed tile
   struct node *right;
   struct node *left;
   struct node *up;
@@ -99,6 +99,7 @@ void print_board_list(struct node* current, int place){
   colors[3] = "\x1b[45m";
   colors[4] = "\x1b[41m";
   colors[5] = "\x1b[102m";
+  colors[6] = "\x1b[103m";
   int i;
   for(i = 0; i < 3; i++){
     struct node* temp = current;
@@ -227,7 +228,7 @@ int check_word_validity(struct node* start, int direction){
     //printf("\t\t%c\n", word[i]);
   }
   word[i] = '\0';
-  printf("\tthe word is %s, the length is %d, i is %d\n", word, length, i);
+  //printf("\tthe word is %s, the length is %d, i is %d\n", word, length, i);
 
   //check if word is real, returns 1 if real, 0 if not
   return valid_word(word);
@@ -238,7 +239,7 @@ int get_horizontal_word(struct node* start){
   for(i = 0; get_char_value(start, i - 1); i--);
   struct node *far_left = get_node(start, i, 0);
   if(!check_word_validity(far_left, 0) && get_char_value(far_left, 1)) return 1; //1 means error
-  printf("Horizontal has no error!\n");
+  //printf("Horizontal has no error!%d, %d\n", check_word_validity(far_left, 0), get_char_value(far_left, 1));
   return 0;
 }
 
@@ -247,7 +248,7 @@ int get_vertical_word(struct node* start){
   for(i = 0; get_vertical_char_value(start, i - 1); i--);
   struct node *far_up = get_node(start, 0, i);
   if(!check_word_validity(far_up, 1) && get_vertical_char_value(far_up, 1)) return 1;
-  printf("vertical has no error!\n");
+  //printf("vertical has no error!%d, %d\n", check_word_validity(far_up, 1), (far_up->down)->c);
   return 0;
 }
 
@@ -271,18 +272,21 @@ int check_all_words_validity(struct node* start, int direction){
   return 0;
 
 }
+//////////////////////////////////// new code
 int get_word_sum(struct node* start, int direction){
   //direction 0: horizontal, 1: vertical
-  int i, length, offset = 'a' - 'A';
+  int i, length;
   int sum = 0;
   if(!direction) length = get_length(start);
   else length = get_vertical_length(start);
   for(i = 0; i < length && ( (get_char_value(start, i) && !direction) || (get_vertical_char_value(start, i) && direction) ); i++){
     if(!direction){
-      sum += get_letter_value(get_char_value(start, i) + offset);      
+      printf("%d %d \n",get_char_value(start, i), get_letter_value(get_char_value(start, i)) );
+      sum += get_letter_value(get_char_value(start, i));      
     } 
     else{ 
-      sum += get_letter_value(get_vertical_char_value(start, i) + offset);
+      printf("%d %d \n",get_vertical_char_value(start, i), get_letter_value(get_char_value(start, i)) );
+      sum += get_letter_value(get_vertical_char_value(start, i));
     }
     //printf("\t\t%c\n", word[i]);
   }
@@ -294,19 +298,23 @@ int sum_horizontal_word(struct node* start){
   int i;
   for (i = 0; get_char_value(start,i-1);i--);
   struct node *fare_left = get_node(start,i,0);
+  //return 0;
   return get_word_sum(fare_left,0);
 }
 int sum_vertical_word(struct node* start){
   int i;
   for(i = 0; get_vertical_char_value(start, i - 1); i--);
   struct node *far_up = get_node(start, 0, i);
+  //return 0;
   return get_word_sum(far_up,1);
 }
-int add_new_word_points(struct node* start, int direction){
+int add_new_word_points(struct node* start, int i, int j, int direction){
   if (direction){
-    return sum_horizontal_word(start);
+    return sum_horizontal_word(get_node(start, i, j));
+    //return 0;
   }
   else{
-    return sum_vertical_word(start);
+   //return 0;
+    return sum_vertical_word(get_node(start,  i,  j));
   }  
 }

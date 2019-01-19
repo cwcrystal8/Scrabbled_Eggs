@@ -46,4 +46,4 @@ int sum_horizontal_word(struct node* start);
 
 int sum_vertical_word(struct node* start);
 
-int add_new_word_points(struct node* start, int direction);
+int add_new_word_points(struct node* start, int i, int j, int direction);
