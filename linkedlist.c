@@ -235,7 +235,7 @@ int check_word_validity(struct node* start, int direction){
 
 int get_horizontal_word(struct node* start){
   int i;
-  for(i = 0; get_node(start, i - 1, 0); i--);
+  for(i = 0; get_char_value(start, i - 1); i--);
   struct node *far_left = get_node(start, i, 0);
   if(!check_word_validity(far_left, 0) && get_char_value(far_left, 1)) return 1; //1 means error
   printf("Horizontal has no error!\n");
@@ -244,7 +244,7 @@ int get_horizontal_word(struct node* start){
 
 int get_vertical_word(struct node* start){
   int i;
-  for(i = 0; get_node(start, 0, i - 1); i--);
+  for(i = 0; get_vertical_char_value(start, i - 1); i--);
   struct node *far_up = get_node(start, 0, i);
   if(!check_word_validity(far_up, 1) && get_vertical_char_value(far_up, 1)) return 1;
   printf("vertical has no error!\n");
@@ -292,13 +292,13 @@ int get_word_sum(struct node* start, int direction){
 }
 int sum_horizontal_word(struct node* start){
   int i;
-  for (i = 0; get_node(start,i-1,0);i--);
+  for (i = 0; get_char_value(start,i-1);i--);
   struct node *fare_left = get_node(start,i,0);
   return get_word_sum(fare_left,0);
 }
 int sum_vertical_word(struct node* start){
   int i;
-  for(i = 0; get_node(start, 0, i - 1); i--);
+  for(i = 0; get_vertical_char_value(start, i - 1); i--);
   struct node *far_up = get_node(start, 0, i);
   return get_word_sum(far_up,1);
 }

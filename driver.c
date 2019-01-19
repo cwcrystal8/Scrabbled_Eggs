@@ -153,16 +153,18 @@ int main(){
                 //print_tiles(player, player_num);
                 //struct node* starting_node = get_node(start, i, j);
                 int k;
+                /*
                 int additional_score = 0;
                 int original_score = 0;
                 int plain_score = 0;
                 int multi = 1;
+                */
                 //printf("added this word: [%s], length is %ld\n", word, strlen(word) -1 );
                 for(k = 0; k < strlen(word); k++){
                   //printf("changing tile at row %d, col %d to %c", j+k, i, word[k]);
                   change_char_value(start, i, j+k, word[k]);
-
-                  if (word[k] != old_word[k]){
+                  /*
+                  if (word[k] == old_word[k]){
                     additional_score += get_letter_value(word[k]);
                   }
                   else{
@@ -187,8 +189,9 @@ int main(){
                     original_score += get_letter_value(word[k]);
                     multi = 3;
                   }
+                  */
                 }
-                int total_score = additional_score - plain_score + (original_score * multi);
+                //int total_score = additional_score - plain_score + (original_score * multi);
 
                 if(check_all_words_validity(get_node(start, i, j), 1)){
                   //printf("\e[1;1H\e[2J\n");
@@ -206,7 +209,7 @@ int main(){
                       change_special_value(start, i, j + k, 6);
                     }
                     is_turn = 0;
-                    set_score(player,get_score(player) + total_score);
+                    //set_score(player,get_score(player) + total_score);
                     print_board(start);
                     center_is_empty = 0;
                   }
@@ -289,17 +292,20 @@ int main(){
                 //print_tiles(player, player_num);
                 //struct node* starting_node = get_node(start, i, j);
                 int k;
+                /*
                 int additional_score = 0;
                 int original_score = 0;
                 int plain_score = 0;
                 int multi = 1;
+                */
                 //printf("added this word: [%s], length is %ld\n", word, strlen(word) -1 );
                 for(k = 0; k < strlen(word); k++){
                   //printf("changing tile at row %d, col %d to %c", j+k, i, word[k]);
                   change_char_value(start, i+k, j, word[k]);
                   //checking for vertical words
                   // getting new code
-                  if (word[k] != old_word[k]){
+                  /*
+                  if (word[k] == old_word[k]){
                     additional_score += get_letter_value(word[k]);
                   }
                   else{
@@ -324,9 +330,9 @@ int main(){
                     original_score += get_letter_value(word[k]);
                     multi = 3;
                   }
-                  
+                  */
                 }
-                int total_score = additional_score - plain_score + (original_score * multi);
+                //int total_score = additional_score - plain_score + (original_score * multi);
                 // TOTAL SCORE IS HERE
                 if(check_all_words_validity(get_node(start, i, j), 0)){
                   //printf("\e[1;1H\e[2J\n");
@@ -347,7 +353,7 @@ int main(){
                     }
                     is_turn = 0;
                     center_is_empty = 0;
-                    set_score(player,get_score(player) + total_score);
+                    //set_score(player,get_score(player) + total_score);
                     print_board(start);
                   }
                 }
