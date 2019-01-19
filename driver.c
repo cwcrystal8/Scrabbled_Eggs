@@ -205,8 +205,8 @@ int main(){
                 int total_score = additional_score - plain_score + (original_score * multi);
                 if(check_all_words_validity(get_node(start, i, j), 1)){
                   //printf("\e[1;1H\e[2J\n");
-                  //printf("\n\t\tError: You must enter a valid word!\n");
-                  for(k = 0; k < strlen(word) - 1; k++){
+                  printf("\n\t\tError: You must enter a valid word!\n");
+                  for(k = 0; k < strlen(word) ; k++){
                     //printf("changing tile at row %d, col %d to %c", j+k, i, word[k]);
                     change_char_value(start, i, j+k, old_word[k]);
                   }
@@ -347,7 +347,7 @@ int main(){
                 if(check_all_words_validity(get_node(start, i, j), 0)){
                   //printf("\e[1;1H\e[2J\n");
                   printf("\n\t\tError: You must enter a valid word!\n\n");
-                  for(k = 0; k < strlen(word) - 1; k++){
+                  for(k = 0; k < strlen(word); k++){
                     //printf("changing tile at row %d, col %d to %c", j+k, i, old_word[k]);
                     change_char_value(start, i+k, j, old_word[k]);
                   }
