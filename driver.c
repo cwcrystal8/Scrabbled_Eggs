@@ -37,7 +37,7 @@ int main(){
   }
   struct Player** all_players = setup(&start, num[0] - '0', &letter_list);
 
-  while(1){
+  while(letter_list){
     printf("\x1b[0m\e[1;1H\e[2J\n\n");
     /*
     printf("\t\tWhose turn is it? Please enter an option from below without the parentheses.\n");
@@ -55,7 +55,7 @@ int main(){
 
     char buf[15];
     int player_num = 1;
-    for(player_num = 1; player_num; player_num = (player_num) % (num[0] - '0') + 1){
+    for(player_num = 1; player_num && letter_list; player_num = (player_num) % (num[0] - '0') + 1){
       printf("\e[1;1H\e[2J\n\n");
       printf("\n\t\t-------------PLAYER %d's TURN HAS BEGUN-------------\n\n", player_num);
       print_board(start);
@@ -171,7 +171,7 @@ int main(){
                   else{
                     additional_score += add_new_word_points(start,i,j+k,1);
                   }
-                  printf("additional_score %d \n ", additional_score);
+                  //printf("additional_score %d \n ", additional_score);
                   
                   // getting original score of placed tiles including bonuses
                   if (get_special_value(get_node(start,i,j+k),0,0) == 0){
@@ -390,7 +390,10 @@ int main(){
         }
       }
       printf("\n\n\t\t-------------PLAYER %d'S TURN HAS ENDED-------------\n\n\n", player_num);
-      printf("\t\t Player %d now has %d points\n", player_num, get_score(player));
+      for(player_num = 1; player_num < (num[0] - '0') + 1 ; player_num++){
+        printf("\t\t Player %d has %d points\n", player_num, get_score(all_players[player_num-1]));
+      }
+      printf("\n");
     }
   }
   return 0;

@@ -177,6 +177,9 @@ struct node * free_list(struct node *current){
 
 struct node * remove_node(struct node *start, int index){ //for tiles only
   struct node* target = get_node(start, index, 0);
+  if (get_length(start) == 1){
+    return NULL;
+  }
   if(index == 0){ //if it is the beginning
     struct node* temp = target->right;
     temp->left = NULL;
@@ -281,11 +284,11 @@ int get_word_sum(struct node* start, int direction){
   else length = get_vertical_length(start);
   for(i = 0; i < length && ( (get_char_value(start, i) && !direction) || (get_vertical_char_value(start, i) && direction) ); i++){
     if(!direction){
-      printf("%d %d \n",get_char_value(start, i), get_letter_value(get_char_value(start, i)) );
+      //printf("%d %d \n",get_char_value(start, i), get_letter_value(get_char_value(start, i)) );
       sum += get_letter_value(get_char_value(start, i));      
     } 
     else{ 
-      printf("%d %d \n",get_vertical_char_value(start, i), get_letter_value(get_char_value(start, i)) );
+      //printf("%d %d \n",get_vertical_char_value(start, i), get_letter_value(get_char_value(start, i)) );
       sum += get_letter_value(get_vertical_char_value(start, i));
     }
     //printf("\t\t%c\n", word[i]);
