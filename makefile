@@ -1,8 +1,8 @@
-all: driver.o linkedlist.o game_setup.o tiles.o board.o player.o dict.o
-	gcc -o runthis driver.o linkedlist.o game_setup.o tiles.o board.o player.o dict.o
+all: test_driver.o linkedlist.o game_setup.o tiles.o board.o player.o dict.o
+	gcc -o runthis test_driver.o linkedlist.o game_setup.o tiles.o board.o player.o dict.o
 
-driver.o: driver.c driver.h
-	gcc -c driver.c
+test_driver.o: test_driver.c networking.h
+	gcc -c test_driver.c
 
 linkedlist.o: linkedlist.c linkedlist.h
 	gcc -c linkedlist.c
