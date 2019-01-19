@@ -166,23 +166,23 @@ int main(){
                     additional_score += get_letter_value(word[k]);
                   }
                   else{
-                    additional_score += add_new_word_points(start,i,j,1);
+                    additional_score += add_new_word_points(start,1);
                   }
                   // getting original score of placed tiles including bonuses
-                  if (get_special_value(get_node(start,i,j)) == 1){
+                  if (get_special_value(get_node(start,i,j),i,j) == 1){
                     plain_score += get_letter_value(word[k]);
                     original_score +=  2 * get_letter_value(word[k]);
                   }
-                  else if(get_special_value(get_node(start,i,j)) == 2) {
+                  else if(get_special_value(get_node(start,i,j),i,j) == 2) {
                     plain_score += get_letter_value(word[k]);
                     original_score += 3* get_letter_value(word[k]);
                   }
-                  else if (get_special_value(get_node(start,i,j)) == 3){
+                  else if (get_special_value(get_node(start,i,j),i,j) == 3){
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 2;
                   }
-                  else if (get_special_value(get_node(start,i,j)) == 4){
+                  else if (get_special_value(get_node(start,i,j),i,j) == 4){
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 3;
@@ -303,23 +303,23 @@ int main(){
                     additional_score += get_letter_value(word[k]);
                   }
                   else{
-                    additional_score += add_new_word_points(start,i,j,0);
+                    additional_score += add_new_word_points(start,0);
                   }
                   // getting original score of placed tiles including bonuses
-                  if (get_special_value(get_node(start,i,j)) == 1){
+                  if (get_special_value(get_node(start,i,j),i,j) == 1){
                     plain_score += get_letter_value(word[k]);
                     original_score +=  2 * get_letter_value(word[k]);
                   }
-                  else if(get_special_value(get_node(start,i,j)) == 2) {
+                  else if(get_special_value(get_node(start,i,j),i,j) == 2) {
                     plain_score += get_letter_value(word[k]);
                     original_score += 3* get_letter_value(word[k]);
                   }
-                  else if (get_special_value(get_node(start,i,j)) == 3){
+                  else if (get_special_value(get_node(start,i,j),i,j) == 3){
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 2;
                   }
-                  else if (get_special_value(get_node(start,i,j)) == 4){
+                  else if (get_special_value(get_node(start,i,j),i,j) == 4){
                     plain_score += get_letter_value(word[k]);
                     original_score += get_letter_value(word[k]);
                     multi = 3;

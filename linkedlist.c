@@ -294,13 +294,13 @@ int sum_horizontal_word(struct node* start){
   int i;
   for (i = 0; get_node(start,i-1,0);i--);
   struct node *fare_left = get_node(start,i,0);
-  return get_word_sum(fare_left,0)
+  return get_word_sum(fare_left,0);
 }
 int sum_vertical_word(struct node* start){
   int i;
   for(i = 0; get_node(start, 0, i - 1); i--);
   struct node *far_up = get_node(start, 0, i);
-  return get_word_sum(far_up,1)
+  return get_word_sum(far_up,1);
 }
 int add_new_word_points(struct node* start, int direction){
   if (direction){
