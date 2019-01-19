@@ -20,6 +20,14 @@
 //\x1b[102m is light green
 //\x1b[0m is return to normal
 
+// int free_all = 0;
+// static void sighandler(int signo){
+//   if (signo == SIGINT){
+//     free_all = 1; // Will free all allocated memory
+//     exit(0);
+//   }
+// }
+
 int main(){
   int center_is_empty = 1;
   struct node *start;
@@ -386,7 +394,16 @@ int main(){
         else if(buf[0] == '4') print_board(start);
         else if(buf[0] == '5') print_tiles(player, player_num);
         else if(buf[0] == '6'){
+          free_list(letter_list);
           free_list(start);
+
+          struct Player* temp = all_players[0];
+          int counter = 0;
+          while(temp != NULL){
+            free(temp);
+            counter+=1;
+            temp = all_players[counter];
+          }
           exit(0);
         }
         else if (buf[0] == '7') {

@@ -88,6 +88,10 @@ Notes: just missing word checker, networking, and point scores
 Finished:
 - First player is now forced to start on the center square
 
+(Steven)
+- Began Incorporating networking code
+- Established compression and extraction methods for communication
+
 ---------
 
 1/17/19 17:39 (Robin)
@@ -106,6 +110,10 @@ Finished:
 - Invalid words are not accepted
 - Tiles removed only AFTER word validity check
 
+(Steven)
+- Optimizations made to previous version
+- Broken test_driver.c into client and host; "Abort trap 6" received when testing locally
+
 ---------
 
 1/18/19 23:54 (Robin)
@@ -113,6 +121,10 @@ Finished:
   Basic player score caculation through the user's tile placement.
 Working on:
   Bugs relating to entering a word that doesn't exist on the first try and Seg faults.
+
+(Steven)
+- Incorporated basic sigint handler to program; fixed minor structure issues
+- Attempting to resolve networking issue; socket read() call not blocked when no write() calls were made.
 
 ---------
 
