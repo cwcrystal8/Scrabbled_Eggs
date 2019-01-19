@@ -15,41 +15,52 @@ pd 4
 ==============================================================
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-
-1/18/19 (Crystal)
+12/28/18 08:23 (Crystal)
 Finished:
-- First player to MAKE A MOVE is forced to start on the center square (fixed bug)
-- Placed tiles have different colors and special values (e.g. double letter, triple word) removed
-- Invalid words are not accepted
-- Tiles removed only AFTER word validity check
-
+- Wrote and added DESIGN doc
 
 ---------
 
-
-1/16/19 (Crystal)
+1/2/19 10:03 (Robin)
 Finished:
-- First player is now forced to start on the center square
-
+- Added DEVLOG template
 
 ---------
 
-
-1/15/19 (Crystal)
+1/7/19 21:42 (Crystal)
 Finished:
-- User can now play scrabble among players locally
-- Supports word additions
-- Checks validity of words
-- Removes tiles and adds them
-- Program cycles through each player, and player's turn ends when they add a words
+- 2D Linkedlist functions:
+  - insert
+  - print (with color-coding for the special squares)
+  - change/set values
+  - etc.
+- Board setup with special squares set
 
-Notes: just missing word checker, networking, and point scores
-
+Notes: I tested basic 2D Linkedlist functions and was able to use the Linkedlist struct to create the Scrabble board
 
 ---------
 
+1/8/19 19:37 (Crystal)
+Finished:
+- Player tile generation
+  - Random tiles are generated and then removed from the total tile pile
+  - Tile distribution is true to the actual game
+- Score points for each letter added
 
-1/14/19 (Crystal)
+Notes: I finished board setup, and tile set up (but only compatible for one player so far)
+
+---------
+
+1/9/19 22:55 (Crystal)
+Finished:
+- Player tile generation supports multiple players
+- Print_info available for player
+- Added letter values on each tile
+- Scrabble board can now be empty
+
+---------
+
+1/14/19 23:38 (Crystal)
 Finished:
 - Searching if added letters is in player tiles is now an option
 - Searching for all added words and checking their validity is now an option
@@ -59,68 +70,55 @@ Finished:
 
 Notes: eventually, want to include print message that tells player of the errors, also want to add a "How to Play"
 
+---------
+
+1/15/19 23:02 (Crystal)
+Finished:
+- User can now play scrabble among players locally
+- Supports word additions
+- Checks validity of words
+- Removes tiles and adds them
+- Program cycles through each player, and player's turn ends when they add a words
+
+Notes: just missing word checker, networking, and point scores
 
 ---------
 
+1/16/19 00:02 (Crystal)
+Finished:
+- First player is now forced to start on the center square
 
-1/10/19 (Robin)
+---------
+
+1/17/19 17:39 (Robin)
 Finished:
 - Wrote dictionary file to check if inputted words are actual English words
+- Wrote a search that loops through dictionary and tries to find a given word.
 
 Notes: search is linear O(n) right now (time: ~1s); if we have time, we want to implement a binary search
 
+---------
+
+1/18/19 22:32 (Crystal)
+Finished:
+- First player to MAKE A MOVE is forced to start on the center square (fixed bug)
+- Placed tiles have different colors and special values (e.g. double letter, triple word) removed
+- Invalid words are not accepted
+- Tiles removed only AFTER word validity check
 
 ---------
 
-
-1/9/19 (Crystal)
+1/18/19 23:54 (Robin)
 Finished:
-- Player tile generation supports multiple players
-- Print_info available for player
-- Added letter values on each tile
-- Scrabble board can now be empty
-
+  Basic player score caculation through the user's tile placement.
+Working on:
+  Bugs relating to entering a word that doesn't exist on the first try and Seg faults.
 
 ---------
 
-
-1/8/19 (Crystal)
+1/19/19 04:53 (Robin)
 Finished:
-- Player tile generation
-  - Random tiles are generated and then removed from the total tile pile
-  - Tile distribution is true to the actual game
-- Score points for each letter added
-
-Notes: I finished board setup, and tile set up (but only compatible for one player so far)
-
-
+  Fixed majority of the bugs and did more testing. Added checking player score functionality in with the rest of the options given 
+  to the user when it is their turn. 
+  
 ---------
-
-
-1/7/19 (Crystal)
-Finished:
-- 2D Linkedlist functions:
-  - insert
-  - print (with color-coding for the special squares)
-  - change/set values
-  - etc.
-- Board setup with special squares set
-
-
-Notes: I tested basic 2D Linkedlist functions and was able to use the Linkedlist struct to create the Scrabble board
-
-
----------
-
-
-1/2/19 (Robin)
-Finished:
-- Added DEVLOG template
-
-
----------
-
-
-12/28/18 (Crystal)
-Finished:
-- Wrote and added DESIGN doc
