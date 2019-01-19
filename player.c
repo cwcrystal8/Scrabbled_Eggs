@@ -25,7 +25,7 @@ struct node * get_tiles(struct Player* player){
 
 void print_tiles(struct Player* player, int player_num){
   char *colors[6];
-  colors[0] = "\x1b[107m";
+  colors[0] = "\x1b[103m";
 
   int i;
   for(i = 0; i < 3; i++){

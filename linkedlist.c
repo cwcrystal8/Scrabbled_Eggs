@@ -8,7 +8,7 @@
 
 struct node {
   char c;
-  int special; //0 is regular, 1 is double letter, 2 is triple letter, 3 is double word, 4 is triple word
+  int special; //0 is regular, 1 is double letter, 2 is triple letter, 3 is double word, 4 is triple word, 5 is starting tile, 6 is a placed tile
   struct node *right;
   struct node *left;
   struct node *up;
@@ -99,6 +99,7 @@ void print_board_list(struct node* current, int place){
   colors[3] = "\x1b[45m";
   colors[4] = "\x1b[41m";
   colors[5] = "\x1b[102m";
+  colors[6] = "\x1b[103m";
   int i;
   for(i = 0; i < 3; i++){
     struct node* temp = current;
@@ -227,7 +228,7 @@ int check_word_validity(struct node* start, int direction){
     //printf("\t\t%c\n", word[i]);
   }
   word[i] = '\0';
-  printf("\tthe word is %s, the length is %d, i is %d\n", word, length, i);
+  //printf("\tthe word is %s, the length is %d, i is %d\n", word, length, i);
 
   //check if word is real, returns 1 if real, 0 if not
   return valid_word(word);
@@ -235,19 +236,19 @@ int check_word_validity(struct node* start, int direction){
 
 int get_horizontal_word(struct node* start){
   int i;
-  for(i = 0; get_node(start, i - 1, 0); i--);
+  for(i = 0; get_char_value(start, i - 1); i--);
   struct node *far_left = get_node(start, i, 0);
   if(!check_word_validity(far_left, 0) && get_char_value(far_left, 1)) return 1; //1 means error
-  printf("Horizontal has no error!\n");
+  //printf("Horizontal has no error!%d, %d\n", check_word_validity(far_left, 0), get_char_value(far_left, 1));
   return 0;
 }
 
 int get_vertical_word(struct node* start){
   int i;
-  for(i = 0; get_node(start, 0, i - 1); i--);
+  for(i = 0; get_vertical_char_value(start, i - 1); i--);
   struct node *far_up = get_node(start, 0, i);
   if(!check_word_validity(far_up, 1) && get_vertical_char_value(far_up, 1)) return 1;
-  printf("vertical has no error!\n");
+  //printf("vertical has no error!%d, %d\n", check_word_validity(far_up, 1), (far_up->down)->c);
   return 0;
 }
 

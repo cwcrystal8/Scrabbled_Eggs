@@ -16,13 +16,21 @@ pd 4
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
+1/18/19 (Crystal)
+Finished:
+- First player to MAKE A MOVE is forced to start on the center square (fixed bug)
+- Placed tiles have different colors and special values (e.g. double letter, triple word) removed
+- Invalid words are not accepted
+- Tiles removed only AFTER word validity check
+
+
+---------
+
+
 1/16/19 (Crystal)
 Finished:
 - First player is now forced to start on the center square
 
-
-uncompleted:
-- color change when changing the word
 
 ---------
 
