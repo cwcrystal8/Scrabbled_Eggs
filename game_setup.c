@@ -46,14 +46,16 @@ void print_board_info(){
   colors[3] = "\x1b[45m";
   colors[4] = "\x1b[41m";
   colors[5] = "\x1b[102m";
+  colors[6] = "\x1b[103m";
   key[0] = "Regular tiles";
   key[1] = "Double-letter tiles";
   key[2] = "Triple-letter tiles";
   key[3] = "Double-word tiles";
   key[4] = "Triple-word tiles";
   key[5] = "Start tile";
+  key[6] = "Placed tile";
   int j, i;
-  for(j = 0; j < 6; j++){
+  for(j = 0; j < 7; j++){
     for(i = 0; i < 3; i++){
         printf("\t\t");
         if (i == 1) printf("\x1b[30m%s      \x1b[0m = %s\n", colors[j], key[j]);

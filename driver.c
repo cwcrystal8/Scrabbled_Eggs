@@ -72,7 +72,8 @@ int main(){
         printf("\t\t(3) Pass my turn\n");
         printf("\t\t(4) See the board\n");
         printf("\t\t(5) See my tiles\n");
-        printf("\t\t(6) Exit the game\n\n");
+        printf("\t\t(6) Exit the game\n");
+        printf("\t\t(7) Display player scores\n\n");
         //printf("\t\t()\n");
         printf("\t\tI want to chose option ");
         fgets(buf, 15, stdin);
@@ -388,12 +389,15 @@ int main(){
           free_list(start);
           exit(0);
         }
+        else if (buf[0] == '7') {
+          for(player_num = 1; player_num < (num[0] - '0') + 1 ; player_num++){
+            printf("\t\t Player %d has %d points\n", player_num, get_score(all_players[player_num-1]));
+          }
+          printf("\n");
+        }
       }
       printf("\n\n\t\t-------------PLAYER %d'S TURN HAS ENDED-------------\n\n\n", player_num);
-      for(player_num = 1; player_num < (num[0] - '0') + 1 ; player_num++){
-        printf("\t\t Player %d has %d points\n", player_num, get_score(all_players[player_num-1]));
-      }
-      printf("\n");
+      
     }
   }
   return 0;
