@@ -18,8 +18,9 @@ $ make run
 ## General Advice
 1. Have CAPS LOCK ON to enter information into our game!
 2. Open your terminal to its max size and zoom out a bit if needed. Our game works best with a large viewing screen.
-3. Read the instructions carefully! Try not to input something in the wrong format.
-4. HAVE FUN!! 
+3. Read the instructions carefully! Try not to input something in the wrong format.  
+4. If you are unsure how to play you can learn more [here](http://www.scrabblepages.com/scrabble/rules/)
+5. HAVE FUN!! 
 ## How to Play
 To start playing our game, just like the real life game, our program allows up to 4 players to play at once. Each person will be given 7 tiles which are all randomly drawn from a bag of tiles. Each turn, a user is given the following 7 options:
   
