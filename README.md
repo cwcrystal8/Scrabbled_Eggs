@@ -5,7 +5,7 @@ Steven Liu
 pd 2
 
 --------------------- 
-Welcome to our project Scrabbled_Eggs! Our game is based off of Scrabble, a world-letter board game.
+Welcome to our project Scrabbled_Eggs! Our game is based off of Scrabble, a word-letter board game.
 ## How to Run
 1. In a bash shell, run:
 ~~~
