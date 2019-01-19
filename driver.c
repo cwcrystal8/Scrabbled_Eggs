@@ -298,7 +298,7 @@ int main(){
           //printf("set to one!!!!!!!!!!!!!!!!\n");
         }
         else if(buf[0] == '2') print_info();
-        else if(buf[0] == '3') buf[0] = '1';
+        else if(buf[0] == '3') is_turn = 0;
         else if(buf[0] == '4') print_board(start);
         else if(buf[0] == '5') print_tiles(player, player_num);
         else if(buf[0] == '6'){
