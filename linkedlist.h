@@ -37,3 +37,13 @@ int check_all_words_validity(struct node* start, int direction);
 int get_horizontal_word(struct node* start);
 
 int get_vertical_word(struct node* start);
+
+int check_all_words_validity(struct node* start, int direction);
+
+int get_word_sum(struct node* start, int direction);
+
+int sum_horizontal_word(struct node* start);
+
+int sum_vertical_word(struct node* start);
+
+int add_new_word_points(struct node* start, int direction);
